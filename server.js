@@ -1,7 +1,7 @@
 const http = require("http");
-const fs = require("fs/promises");
-const { v4: uuidv4 } = require("uuid");
-const { Client } = require("pg");
+const fs = require("fs/promises"); //Sin usar de momento
+const { v4: uuidv4 } = require("uuid"); //Sin usar de momentos
+const { Pool, Client } = require("pg");
 
 const credenciales = {
   user: "lagnay",
@@ -22,15 +22,15 @@ async function clientDemo() {
   return now;
 }
 
-// async function poolDemo() {
-//   //Conexión a través de un pool de conexiones
+async function poolDemo() {
+  //Conexión a través de un pool de conexiones
 
-//   const pool = new Pool(credenciales);
-//   const now = await pool.query("SELECT NOW()");
-//   await pool.end();
+  const pool = new Pool(credenciales);
+  const now = await pool.query("SELECT NOW()");
+  await pool.end();
 
-//   return now;
-// }
+  return now;
+}
 
 //Ejemplo para tareas mientras no se conecta la bd.
 const tareas = {
